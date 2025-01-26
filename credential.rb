@@ -2,7 +2,37 @@
 
 require 'base64'
 require 'json'
+require 'optparse'
+require 'ostruct'
 require 'zlib'
+
+# Class to process command-line arguments
+class Options
+  def self.parse(args)
+    options = OpenStruct.new
+    options.image = nil
+    options.metadata = nil
+    options.badge = nil
+
+    opt_parser = OptionParser.new do |opts|
+      opts.banner = 'Usage:  credential.rb [options]'
+      opts.separator ''
+      opts.separator 'Specific options:'
+      opts.on('-i', '--image file.png', 'The badge image') do |i|
+        options.image = i
+      end
+      opts.on('-m', '--metadata file.json', 'The file containing the badge metadata, in JSON') do |m|
+        options.metadata = m
+      end
+      opts.on('-b', '--badge file.png', 'The name for the output badge') do |b|
+        options.badge = b
+      end
+    end
+
+    opt_parser.parse!(args)
+    options
+  end
+end
 
 def embed_metadata(image_path, metadata_path, output_path)
   image_data = File.read image_path, mode: 'rb'
@@ -65,10 +95,21 @@ def assemble_png(image_data, metadata_chunk, signature)
   end.join
 end
 
-if __FILE__ == $PROGRAM_NAME
-  image_file = 'badge.png'
-  metadata_file = 'metadata.json'
-  output_file = 'badge_with_metadata.png'
+options = Options.parse ARGV
 
-  embed_metadata image_file, metadata_file, output_file
+if options.image.nil?
+  puts "This program requires the --image option to specify the badge image."
+  return
 end
+
+if options.metadata.nil?
+  puts "This program requires the --metadata option to specify the file with badge metadata."
+  return
+end
+
+if options.badge.nil?
+  options.badge = "final-#{options.image}"
+end
+
+embed_metadata options.image, options.metadata, options.badge
+
