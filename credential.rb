@@ -98,18 +98,15 @@ end
 options = Options.parse ARGV
 
 if options.image.nil?
-  puts "This program requires the --image option to specify the badge image."
+  puts 'This program requires the --image option to specify the badge image.'
   return
 end
 
 if options.metadata.nil?
-  puts "This program requires the --metadata option to specify the file with badge metadata."
+  puts 'This program requires the --metadata option to specify the file with badge metadata.'
   return
 end
 
-if options.badge.nil?
-  options.badge = "final-#{options.image}"
-end
+options.badge = "final-#{options.image}" if options.badge.nil?
 
 embed_metadata options.image, options.metadata, options.badge
-
