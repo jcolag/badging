@@ -52,7 +52,7 @@ def embed_metadata(image_path, metadata_path, output_path)
 end
 
 def validate_metadata(metadata)
-  required_fields = %w[@context type badge recipient issuedOn]
+  required_fields = %w[@context id type issuer validFrom name credentialSchema proof]
   missing_fields = required_fields - metadata.keys
   raise "Metadata missing required fields: #{missing_fields.join(', ')}" unless missing_fields.empty?
 end
