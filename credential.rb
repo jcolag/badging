@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'base64'
 require 'chunky_png'
 require 'json'
 require 'optparse'
