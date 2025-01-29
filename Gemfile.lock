@@ -1,13 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    zlib (3.2.1)
+    chunky_png (1.4.0)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  zlib (~> 3.2, >= 3.2.1)
+  chunky_png (~> 1.4)
 
 BUNDLED WITH
    2.3.20
