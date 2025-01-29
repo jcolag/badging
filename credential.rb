@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'base64'
+require 'chunky_png'
 require 'json'
 require 'optparse'
 require 'ostruct'
@@ -34,15 +35,15 @@ class Options
 end
 
 def embed_metadata(image_path, metadata_path, output_path)
-  image_data = File.read image_path, mode: 'rb'
+  image = ChunkyPNG::Image.from_file image_path
   metadata = JSON.parse File.read(metadata_path)
 
   validate_metadata metadata
 
   metadata_json = JSON.pretty_generate metadata
+  image.metadata['openbadgecredential'] = metadata_json
 
-
-  File.open(output_path, 'wb') { |f| f.write output_data }
+  image.save output_path
   puts "Badge with metadata saved to: #{output_path}"
 end
 
