@@ -17,14 +17,14 @@ class Options
       opts.banner = 'Usage:  credential.rb [options]'
       opts.separator ''
       opts.separator 'Specific options:'
+      opts.on('-b', '--badge file.png', 'The name for the output badge') do |b|
+        options.badge = b
+      end
       opts.on('-i', '--image file.png', 'The badge image') do |i|
         options.image = i
       end
       opts.on('-m', '--metadata file.json', 'The file containing the badge metadata, in JSON') do |m|
         options.metadata = m
-      end
-      opts.on('-b', '--badge file.png', 'The name for the output badge') do |b|
-        options.badge = b
       end
     end
 
