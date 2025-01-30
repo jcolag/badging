@@ -26,6 +26,12 @@ class Options
       opts.on('-m', '--metadata file.json', 'The file containing the badge metadata, in JSON') do |m|
         options.metadata = m
       end
+      opts.on('-o', '--organization org.yml', 'The file containing the organization metadata, in YAML') do |o|
+        options.organization = o
+      end
+      opts.on('-r', '--recipient badge.yml', 'The file containing the badge and recipient metadata, in YAML') do |r|
+        options.recipient = r
+      end
     end
 
     opt_parser.parse!(args)
