@@ -65,11 +65,18 @@ if options.image.nil?
   return
 end
 
-if options.metadata.nil?
-  puts 'This program requires the --metadata option to specify the file with badge metadata.'
+if options.organization.nil?
+  puts 'This program requires the --organization option to specify the file with'
+  puts 'your organizational metadata.'
+  return
+end
+
+if options.recipient.nil?
+  puts 'This program requires the --recipient option to specify the file with'
+  puts 'the badge and recipient metadata.'
   return
 end
 
 options.badge = "final-#{options.image}" if options.badge.nil?
 
-embed_metadata options.image, options.metadata, options.badge
+embed_metadata options.image, options.organization, options.recipient, options.badge
