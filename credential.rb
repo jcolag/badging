@@ -39,11 +39,11 @@ class Options
   end
 end
 
-def embed_metadata(image_path, metadata_path, output_path)
+def embed_metadata(image_path, organization_path, recipient_path, output_path)
   image = ChunkyPNG::Image.from_file image_path
-  metadata = JSON.parse File.read(metadata_path)
-
-  validate_metadata metadata
+  org = YAML.load_file organization_path
+  recip = YAML.load_file recipient_path
+  metadata = org.merge recip
 
   metadata_json = JSON.pretty_generate metadata
   image.metadata['openbadgecredential'] = metadata_json
