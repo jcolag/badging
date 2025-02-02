@@ -4,6 +4,7 @@ require 'chunky_png'
 require 'json'
 require 'optparse'
 require 'ostruct'
+require 'yaml'
 
 # Class to process command-line arguments
 class Options
