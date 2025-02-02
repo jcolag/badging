@@ -6,6 +6,27 @@ require 'optparse'
 require 'ostruct'
 require 'yaml'
 
+# Horrifying Monkey-Patch To Allow Parsing of Dates, Part 1
+# See https://github.com/ruby/psych/issues/262
+class UnparsedDateMonkeyPatch
+  def strptime strscalar, fmt, calendar
+    strscalar #-- return input untouched, don't parse nothing.
+  end
+end
+
+# Horrifying Monkey-Patch To Allow Parsing of Dates, Part 2
+# See https://github.com/ruby/psych/issues/262
+module YAML
+  class ClassLoader
+    class Restricted
+      def find klassname
+        return UnparsedDateMonkeyPatch.new if klassname == 'Date'
+        super
+      end
+    end
+  end
+end
+
 # Class to process command-line arguments
 class Options
   def self.parse(args)
@@ -45,10 +66,9 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   org = YAML.load_file organization_path
   recip = YAML.load_file recipient_path
   metadata = org.merge recip
-
   metadata_json = JSON.pretty_generate metadata
-  image.metadata['openbadgecredential'] = metadata_json
 
+  image.metadata['openbadgecredential'] = metadata_json
   image.save output_path
   puts "Badge with metadata saved to: #{output_path}"
 end
