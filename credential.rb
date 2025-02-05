@@ -64,8 +64,27 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   image = ChunkyPNG::Image.from_file image_path
   org = YAML.load_file organization_path
   recip = YAML.load_file recipient_path
-  metadata = org.merge recip
-  metadata_json = JSON.pretty_generate metadata
+  metadata = {
+    "@context": [
+      'https://www.w3.org/ns/credentials/v2',
+      'https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json',
+      'https://purl.imsglobal.org/spec/ob/v3p0/extensions.json'
+    ],
+    "type": %w[
+      VerifiableCredential
+      OpenBadgeCredential
+    ],
+    "credentialSchema": [
+      {
+        "id": 'https://purl.imsglobal.org/spec/ob/v3p0/schema/json/ob_v3p0_achievementcredential_schema.json',
+        "type": '1EdTechJsonSchemaValidator2019'
+      }
+    ]
+  }
+
+  metadata = metadata.merge org
+  metadata = metadata.merge recip
+  metadata_json = JSON.generate metadata
 
   image.metadata['openbadgecredential'] = metadata_json
   image.save output_path
