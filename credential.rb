@@ -45,9 +45,6 @@ class Options
       opts.on('-i', '--image file.png', 'The badge image') do |i|
         options.image = i
       end
-      opts.on('-m', '--metadata file.json', 'The file containing the badge metadata, in JSON') do |m|
-        options.metadata = m
-      end
       opts.on('-o', '--organization org.yml', 'The file containing the organization metadata, in YAML') do |o|
         options.organization = o
       end
