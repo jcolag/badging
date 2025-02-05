@@ -9,7 +9,7 @@ require 'yaml'
 # Horrifying Monkey-Patch To Allow Parsing of Dates, Part 1
 # See https://github.com/ruby/psych/issues/262
 class UnparsedDateMonkeyPatch
-  def strptime strscalar, fmt, calendar
+  def strptime(strscalar, _fmt, _calendar)
     strscalar #-- return input untouched, don't parse nothing.
   end
 end
@@ -18,9 +18,11 @@ end
 # See https://github.com/ruby/psych/issues/262
 module YAML
   class ClassLoader
+    # Nested class to support monkey-patch
     class Restricted
-      def find klassname
+      def find(klassname)
         return UnparsedDateMonkeyPatch.new if klassname == 'Date'
+
         super
       end
     end
