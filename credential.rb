@@ -17,7 +17,7 @@ require 'yaml'
 # See https://github.com/ruby/psych/issues/262
 class UnparsedDateMonkeyPatch
   def strptime(strscalar, _fmt, _calendar)
-    strscalar #-- return input untouched, don't parse nothing.
+    strscalar # Don't parse the input.
   end
 end
 
