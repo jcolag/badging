@@ -4,8 +4,11 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+require 'base64'
 require 'chunky_png'
+require 'ed25519'
 require 'json'
+require 'openssl'
 require 'optparse'
 require 'ostruct'
 require 'yaml'
