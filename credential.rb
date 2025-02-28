@@ -48,16 +48,16 @@ class Options
       opts.banner = 'Usage:  credential.rb [options]'
       opts.separator ''
       opts.separator 'Specific options:'
-      opts.on('-b', '--badge file.png', 'The name for the output badge') do |b|
+      opts.on '-b', '--badge file.png', 'The name for the output badge' do |b|
         options.badge = b
       end
-      opts.on('-i', '--image file.png', 'The badge image') do |i|
+      opts.on '-i', '--image file.png', 'The badge image' do |i|
         options.image = i
       end
-      opts.on('-o', '--organization org.yml', 'The file containing the organization metadata, in YAML') do |o|
+      opts.on '-o', '--organization org.yml', 'The file containing the organization metadata, in YAML' do |o|
         options.organization = o
       end
-      opts.on('-r', '--recipient badge.yml', 'The file containing the badge and recipient metadata, in YAML') do |r|
+      opts.on '-r', '--recipient badge.yml', 'The file containing the badge and recipient metadata, in YAML' do |r|
         options.recipient = r
       end
     end
