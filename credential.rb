@@ -77,14 +77,14 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
       'https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json',
       'https://purl.imsglobal.org/spec/ob/v3p0/extensions.json'
     ],
-    "type": %w[
+    'type': %w[
       VerifiableCredential
       OpenBadgeCredential
     ],
-    "credentialSchema": [
+    'credentialSchema': [
       {
-        "id": 'https://purl.imsglobal.org/spec/ob/v3p0/schema/json/ob_v3p0_achievementcredential_schema.json',
-        "type": '1EdTechJsonSchemaValidator2019'
+        'id': 'https://purl.imsglobal.org/spec/ob/v3p0/schema/json/ob_v3p0_achievementcredential_schema.json',
+        'type': '1EdTechJsonSchemaValidator2019'
       }
     ]
   }
