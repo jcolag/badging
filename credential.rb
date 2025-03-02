@@ -95,11 +95,10 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
 
   image.metadata['openbadgecredential'] = metadata_json
   image.save output_path
-  puts "Badge with metadata saved to: #{output_path}"
 end
 
 def validate_metadata(metadata)
-  required_fields = %w[@context id type issuer validFrom name credentialSchema proof]
+  required_fields = %w[id issuer validFrom name proof]
   missing_fields = required_fields - metadata.keys
   raise "Metadata missing required fields: #{missing_fields.join(', ')}" unless missing_fields.empty?
 end
