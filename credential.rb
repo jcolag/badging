@@ -85,6 +85,20 @@ def base_metadata
       }
     ]
   }
+end
+
+def create_proof(metadata, signature)
+  metadata['proof'] = {
+    'type': 'DataIntegrityProof',
+    'created': Time.now.strftime('%Y-%m-%dT%H:%M:%S.%L%z'),
+    'verificationMethod': metadata['issuer']['id'],
+    'cryptosuite': 'eddsa-rdfc-2022',
+    'proofPurpose': 'assertionMethod',
+    'proofValue': signature
+  }
+  metadata
+end
+
 def embed_metadata(image_path, organization_path, recipient_path, output_path)
   image = ChunkyPNG::Image.from_file image_path
   org = YAML.load_file organization_path
