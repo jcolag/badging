@@ -67,12 +67,9 @@ class Options
   end
 end
 
-def embed_metadata(image_path, organization_path, recipient_path, output_path)
-  image = ChunkyPNG::Image.from_file image_path
-  org = YAML.load_file organization_path
-  recip = YAML.load_file recipient_path
-  metadata = {
-    "@context": [
+def base_metadata
+  {
+    '@context': [
       'https://www.w3.org/ns/credentials/v2',
       'https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json',
       'https://purl.imsglobal.org/spec/ob/v3p0/extensions.json'
@@ -88,6 +85,10 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
       }
     ]
   }
+def embed_metadata(image_path, organization_path, recipient_path, output_path)
+  image = ChunkyPNG::Image.from_file image_path
+  org = YAML.load_file organization_path
+  recip = YAML.load_file recipient_path
 
   metadata = metadata.merge org
   metadata = metadata.merge recip
