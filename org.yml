@@ -6,4 +6,5 @@ issuer:
   type:
     - Profile
   name: Example Issuer
+  private_key: private-example-issuer.pem
 
