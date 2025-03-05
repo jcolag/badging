@@ -125,6 +125,7 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   metadata = base_metadata
 
   metadata = metadata.merge org
+  metadata = add_proof metadata
   metadata = metadata.merge recip
   metadata_json = JSON.generate metadata
 
