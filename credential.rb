@@ -109,6 +109,15 @@ def get_key(metadata)
   Ed25519::SigningKey.new seed
 end
 
+def add_proof(metadata)
+  key = get_key metadata
+
+  metadata['issuer'].delete 'private_key'
+  signature = key.sign File.open('message.bin', 'r:UTF-8', &:read)
+  create_proof metadata, signature
+  metadata
+end
+
 def embed_metadata(image_path, organization_path, recipient_path, output_path)
   image = ChunkyPNG::Image.from_file image_path
   org = YAML.load_file organization_path
