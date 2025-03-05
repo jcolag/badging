@@ -113,6 +113,7 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   image = ChunkyPNG::Image.from_file image_path
   org = YAML.load_file organization_path
   recip = YAML.load_file recipient_path
+  metadata = base_metadata
 
   metadata = metadata.merge org
   metadata = metadata.merge recip
