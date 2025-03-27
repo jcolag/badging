@@ -1,8 +1,28 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bcp47_spec (0.2.1)
+    bigdecimal (3.1.9)
     chunky_png (1.4.0)
     ed25519 (1.3.0)
+    htmlentities (4.3.4)
+    json-canonicalization (1.0.0)
+    json-ld (3.3.2)
+      htmlentities (~> 4.3)
+      json-canonicalization (~> 1.0)
+      link_header (~> 0.0, >= 0.0.8)
+      multi_json (~> 1.15)
+      rack (>= 2.2, < 4)
+      rdf (~> 3.3)
+      rexml (~> 3.2)
+    link_header (0.0.8)
+    multi_json (1.15.0)
+    rack (3.1.12)
+    rdf (3.3.2)
+      bcp47_spec (~> 0.2)
+      bigdecimal (~> 3.1, >= 3.1.5)
+      link_header (~> 0.0, >= 0.0.8)
+    rexml (3.4.1)
 
 PLATFORMS
   x86_64-linux
@@ -10,6 +30,7 @@ PLATFORMS
 DEPENDENCIES
   chunky_png
   ed25519
+  json-ld
 
 BUNDLED WITH
    2.3.20

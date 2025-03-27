@@ -5,4 +5,5 @@ source 'https://rubygems.org'
 
 gem 'chunky_png'
 gem 'ed25519'
+gem 'json-ld'
 
