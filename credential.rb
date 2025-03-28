@@ -125,6 +125,8 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   recip = YAML.load_file recipient_path
   metadata = base_metadata
 
+  # did = "did:#{url.hostname}#{url.request_uri.gsub '/', ':'}"
+
   metadata = metadata.merge org
   metadata = add_proof metadata
   metadata = metadata.merge recip
