@@ -128,8 +128,8 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   # did = "did:#{url.hostname}#{url.request_uri.gsub '/', ':'}"
 
   metadata = metadata.merge org
-  metadata = add_proof metadata
   metadata = metadata.merge recip
+  metadata = add_proof metadata
   metadata_json = JSON.generate metadata
 
   image.metadata['openbadgecredential'] = metadata_json
