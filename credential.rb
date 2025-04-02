@@ -114,9 +114,9 @@ def add_proof(metadata)
   key = get_key metadata
 
   metadata['issuer'].delete 'private_key'
-  create_proof metadata, signature
   jwt = JSON::JWT.new metadata
   signature = key.sign JSON.generate(jwt)
+  create_proof metadata, signature.bytes.map { |b| format '%02X', b }.join
   metadata
 end
 
