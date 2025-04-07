@@ -1,7 +1,14 @@
 #!/bin/sh
+type=rsa
 name=$(yq -r .issuer.name org.yml | tr '[:upper:]' '[:lower:]' | tr '[:punct:]' '-' | tr '[:space:]' '-' | tr -s '-' | sed 's/-*$//g')
-openssl genpkey -algorithm ed25519 -out "private-${name}.pem"
-openssl pkey -in "private-${name}.pem" -pubout -out "public-${name}.pem"
+
+if [ -n "$1" ]
+then
+  type="$1"
+fi
+
+openssl genpkey -algorithm "$type" -out "private-${name}-${type}.pem"
+openssl pkey -in "private-${name}-${type}.pem" -pubout -out "public-${name}-${type}.pem"
 
 ## Creating a signature:
 # openssl pkeyutl -sign -inkey private-example-issuer.pem -out signature.bin -rawin -in message.bin
