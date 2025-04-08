@@ -101,13 +101,7 @@ def create_proof(metadata, signature)
 end
 
 def get_key(metadata)
-  keylines = File.binread(metadata['issuer']['private_key']).split "\n"
-  asn1 = OpenSSL::ASN1.decode Base64.decode64 keylines[1]
-  private_key_octet = asn1.value[2]
-  inner_der = private_key_octet.value
-  seed = inner_der[2, 32]
-
-  Ed25519::SigningKey.new seed
+  OpenSSL::PKey::RSA.new File.read metadata['issuer']['private_key']
 end
 
 def add_proof(metadata)
