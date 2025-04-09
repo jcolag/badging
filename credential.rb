@@ -52,7 +52,7 @@ class Options
       opts.on '-b', '--badge file.png', 'The name for the output badge' do |b|
         options.badge = b
       end
-      opts.on '-i', '--image file.png', 'The badge image' do |i|
+      opts.on '-i', '--image file.png', 'The badge input image, in PNG format' do |i|
         options.image = i
       end
       opts.on '-o', '--organization org.yml', 'The file containing the organization metadata, in YAML' do |o|
