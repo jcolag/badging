@@ -1,10 +1,19 @@
 # SPDX-FileCopyrightText: 2024 John Colagioia <jcolag@colagioia.net>
 #
 # SPDX-License-Identifier: CC0-1.0
+#
+# Please see https://www.imsglobal.org/spec/ob/v3p0#profile for possible or
+# likely contents.
 issuer:
-  id: https://example.org/issuer-profile
+  alsoKnownAs: https://issuer.example/issuer-profile
+  description: A fictional issuer used as an example
+  email: info@issuer.example
+  id: did:web:issuer.example:issuer-profile
   type:
     - Profile
   name: Example Issuer
+  phone: +1 (099) 555-0138
   private_key: private-example-issuer-rsa.pem
+  public_key: public-example-issuer-rsa.pem
+  url:  https://issuer.example
 
