@@ -141,6 +141,20 @@ def validate_metadata(metadata)
   raise "Metadata missing required fields: #{missing_fields.join(', ')}" unless missing_fields.empty?
 end
 
+def create_org_profile(org_path)
+  base = base_metadata
+  org = YAML.load_file org_path
+  org = org['issuer']
+  keyfile = org.delete 'public_key'
+  pubkey = File.read keyfile
+  outfile = "#{org['id'].split(':')[-1]}.json"
+
+  org.delete 'private_key'
+  org['public_key'] = pubkey
+  org['@context'] = base[:@context]
+  File.write outfile, JSON.generate(org)
+end
+
 options = Options.parse ARGV
 
 if options.image.nil?
