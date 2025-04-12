@@ -58,7 +58,7 @@ class Options
       opts.on '-o', '--organization org.yml', 'The file containing the organization metadata, in YAML' do |o|
         options.organization = o
       end
-      opts.on '-p', '--profile', 'Generate a profile for the specified organization' do |o|
+      opts.on '-p', '--profile', 'Generate a profile for the specified organization' do |p|
         options.profile = true
       end
       opts.on '-r', '--recipient badge.yml', 'The file containing the badge and recipient metadata, in YAML' do |r|
@@ -175,5 +175,9 @@ if options.recipient.nil?
 end
 
 options.badge = "final-#{options.image}" if options.badge.nil?
+
+unless options.profile
+  create_org_profile options.organization
+end
 
 embed_metadata options.image, options.organization, options.recipient, options.badge
