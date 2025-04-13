@@ -5,10 +5,10 @@
 # Please see https://www.imsglobal.org/spec/ob/v3p0#profile for possible or
 # likely contents.
 issuer:
-  alsoKnownAs: https://issuer.example/issuer-profile
+  alsoKnownAs: https://issuer.example/example-issuer-profile
   description: A fictional issuer used as an example
   email: info@issuer.example
-  id: did:web:issuer.example:issuer-profile
+  id: did:web:issuer.example:example-issuer-profile
   type:
     - Profile
   name: Example Issuer
