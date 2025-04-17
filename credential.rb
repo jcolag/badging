@@ -6,7 +6,6 @@
 
 require 'base64'
 require 'chunky_png'
-require 'ed25519'
 require 'json'
 require 'json/jwt'
 require 'openssl'
