@@ -110,6 +110,7 @@ def add_proof(metadata)
   key = get_key metadata
 
   metadata['issuer'].delete 'private_key'
+  metadata['issuer']['public_key'] = File.read metadata['issuer']['public_key']
   jwt = JSON::JWT.new metadata
   jwt.kid = key.to_jwk.thumbprint
   signature = jwt.sign key, :RS256
