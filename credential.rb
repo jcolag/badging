@@ -7,6 +7,7 @@
 require 'base64'
 require 'chunky_png'
 require 'json'
+require 'json/canonicalization'
 require 'json/jwt'
 require 'openssl'
 require 'optparse'
@@ -116,6 +117,12 @@ def add_proof(metadata)
   signature = jwt.sign key, :RS256
   create_proof metadata, signature
   metadata
+end
+
+def to_canonicalized_json(obj)
+  json = obj.to_json
+  o_parsed = JSON.parse json
+  o_parsed.to_json_c14n
 end
 
 def embed_metadata(image_path, organization_path, recipient_path, output_path)
