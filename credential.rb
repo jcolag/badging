@@ -134,7 +134,7 @@ def embed_metadata(image_path, organization_path, recipient_path, output_path)
   metadata = metadata.merge org
   metadata = metadata.merge recip
   metadata = add_proof metadata
-  metadata_json = JSON.generate metadata
+  metadata_json = to_canonicalized_json metadata
 
   image.metadata['openbadgecredential'] = metadata_json
   image.save output_path
