@@ -181,8 +181,5 @@ end
 
 options.badge = "final-#{options.image}" if options.badge.nil?
 
-unless options.profile
-  create_org_profile options.organization
-end
-
+create_org_profile options.organization unless options.profile
 embed_metadata options.image, options.organization, options.recipient, options.badge
